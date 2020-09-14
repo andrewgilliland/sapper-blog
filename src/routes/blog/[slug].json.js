@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import marked from "marked";
+import grayMatter from "gray-matter";
 
 // const lookup = new Map();
 // posts.forEach(post => {
@@ -12,29 +13,29 @@ export function get(req, res, next) {
   // this file is called [slug].json.js
   const { slug } = req.params;
 
-  // if (lookup.has(slug)) {
   res.writeHead(200, {
     "Content-Type": "application/json",
   });
 
+  // Reading correct file
   const post = fs.readFileSync(
-    path.resolve("src/posts", "first-post.md"),
+    path.resolve("src/posts", `${slug}.md`),
     "utf-8"
   );
-  console.log("post", post);
-  const renderer = new marked.Renderer();
-  const html = marked(post, { renderer });
-  const data = {
-    title: "A new post",
-    slug: "a-new-post",
-    html,
-  };
 
-  res.end(JSON.stringify(data));
-  // } else {
-  // 	res.writeHead(404, {
-  // 		'Content-Type': 'application/json'
-  // 	});
+  // Parse front matter
+  const { data, content } = grayMatter(post);
+
+  // Render html from string
+  const renderer = new marked.Renderer();
+  const html = marked(content, { renderer });
+
+  res.end(
+    JSON.stringify({
+      html,
+      ...data,
+    })
+  );
 
   res.end(
     JSON.stringify({
