@@ -9,7 +9,7 @@
 
 <style>
   main {
-    position: relative;
+    /* position: relative; */
     background-color: white;
     padding: 2em;
     box-sizing: border-box;

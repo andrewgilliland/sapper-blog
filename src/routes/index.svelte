@@ -1,5 +1,7 @@
 <script>
   import { goto } from "@sapper/app";
+  import Image from "svelte-image";
+  import { fadeIn, fadeOut } from "../animate.js";
 
   function doThing() {
     console.log("doing thing");
@@ -8,13 +10,6 @@
 </script>
 
 <style>
-  h1,
-  figure,
-  p {
-    text-align: center;
-    margin: 0 auto;
-  }
-
   h1 {
     font-size: 2.8em;
     text-transform: uppercase;
@@ -47,16 +42,17 @@
   <title>Sapper project template</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+<div in:fadeIn out:fadeOut>
+  <h1>Great success!</h1>
 
-<button on:click={doThing}>Send me elsewhere</button>
+  <figure>
+    <Image alt="Success Kid" src="successkid.jpg" />
+    <figcaption>Have fun with Sapper!</figcaption>
+  </figure>
 
-<figure>
-  <img alt="Success Kid" src="successkid.jpg" />
-  <figcaption>Have fun with Sapper!</figcaption>
-</figure>
-
-<p>
-  <strong>Try editing this file (src/routes/index.svelte) to test live
-    reloading.</strong>
-</p>
+  <p>
+    <strong>Try editing this file (src/routes/index.svelte) to test live
+      reloading.</strong>
+  </p>
+  <button on:click={doThing}>Send me elsewhere</button>
+</div>

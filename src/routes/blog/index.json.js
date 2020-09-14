@@ -32,6 +32,8 @@ function sortPosts(posts) {
 }
 
 export function get(req, res) {
+  console.log(process.env.SUPER_SECRET);
+
   const posts = getAllPosts("src/posts");
   const sortedPosts = sortPosts(posts);
 

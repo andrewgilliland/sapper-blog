@@ -8,6 +8,7 @@
 
 <script>
   export let posts;
+  import { fadeIn, fadeOut } from "../../animate.js";
 </script>
 
 <style>
@@ -21,7 +22,7 @@
   <title>Blog</title>
 </svelte:head>
 
-<div>
+<div in:fadeIn out:fadeOut>
   <h1>Recent posts</h1>
 
   <ul>
